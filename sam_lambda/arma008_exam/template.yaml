@@ -11,6 +11,7 @@ Globals:
     LoggingConfig:
       LogFormat: JSON
 
+
 Resources:
   # Lambda function resource
   ImageGenerationFunction:
@@ -22,6 +23,9 @@ Resources:
       Architectures:
         - x86_64
       Role: !GetAtt ImageGenerationFunctionRole.Arn  # Attach the IAM role here
+      Environment:
+        Variables:
+          BUCKET_NAME: !Sub '{{resolve:ssm:/arma008_bucket_name}}'
       Events:
         ImageGenerationAPI:
           Type: Api
@@ -55,6 +59,24 @@ Resources:
             Action: bedrock:InvokeModel
             Resource: arn:aws:bedrock:us-east-1::foundation-model/amazon.titan-image-generator-v1
 
+
+
+  SSMParameterAccessPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: SSMParameterAccessPolicy
+      Roles:
+        - !Ref ImageGenerationFunctionRole
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action:
+              - ssm:GetParameter
+            Resource: !Sub 'arn:aws:ssm:eu-west-1:244530008913:parameter/arma008_bucket_name'
+
+
+
   # Policy to allow Lambda function to upload images to S3
   ImageGenerationS3Policy:
     Type: AWS::IAM::Policy
@@ -67,7 +89,7 @@ Resources:
         Statement:
           - Effect: Allow
             Action: s3:PutObject
-            Resource: arn:aws:s3:::pgr301-couch-explorers/80/generated_images/*  #Hardcoded candidate number (80)
+            Resource: !Sub "arn:aws:s3:::pgr301-couch-explorers/80/generated_images/*"
 
 Outputs:
   # API Gateway URL for image generation

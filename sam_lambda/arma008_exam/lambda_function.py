@@ -1,4 +1,6 @@
 import base64
+import os
+
 import boto3
 import json
 import random
@@ -8,11 +10,13 @@ import traceback
 bedrock_client = boto3.client("bedrock-runtime", region_name="us-east-1")
 s3_client = boto3.client("s3")
 
-candidate_number = "80"
 
 # Define model ID and S3 bucket name
 model_id = "amazon.titan-image-generator-v1"
-bucket_name = "pgr301-couch-explorers"
+bucket_name = os.environ['BUCKET_NAME']
+candidate_number = "80"
+
+# bucket_name = "pgr301-couch-explorers"
 
 def lambda_handler(event, context):
     try:
