@@ -1,0 +1,95 @@
+# Python bytecode files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.venv/
+env/
+venv/
+ENV/
+
+# Pipenv and Poetry
+Pipfile
+Pipfile.lock
+poetry.lock
+
+# Environment variable files
+.env
+.env.*
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# AWS credentials and config files
+.aws/credentials
+.aws/config
+
+# macOS files
+.DS_Store
+
+# Logs and local test files
+*.log
+*.out
+*.err
+
+# Temporary files
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# Caches
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Docker
+*.dockerignore
+docker-compose.override.yml
+docker-compose.yml
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+.terraform.lock.hcl
+
+# AWS Lambda package artifacts
+*.zip
+*.tar.gz
+
+# Local AWS SAM files
+.aws-sam/
+
+# IDE and editor settings
+.vscode/
+.idea/
+*.iml
+*.sublime-project
+*.sublime-workspace
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.pytest_cache/
+.coverage
+coverage.xml
+*.cover
+
+# MyPy cache
+.mypy_cache/
+
+# Pyre
+.pyre/
+
+# Pyright
+.pyright/
+
+# AWS Amplify files
+amplify/# Only if using Amplify
+
+# Serverless Framework
+.serverless/

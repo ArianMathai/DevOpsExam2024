@@ -1,0 +1,86 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  arma008_exam
+
+  Sample SAM Template for arma008_exam
+
+Globals:
+  Function:
+    Timeout: 60
+    LoggingConfig:
+      LogFormat: JSON
+
+Resources:
+  # Lambda function resource
+  ImageGenerationFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.12
+      Architectures:
+        - x86_64
+      Role: !GetAtt ImageGenerationFunctionRole.Arn  # Attach the IAM role here
+      Events:
+        ImageGenerationAPI:
+          Type: Api
+          Properties:
+            Path: /generate-image
+            Method: post
+
+  # IAM Role for Lambda function
+  ImageGenerationFunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+
+  # Policy to allow Lambda function to invoke AWS Bedrock model
+  ImageGenerationPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: BedrockInvokeModelPolicy
+      Roles:
+        - Ref: ImageGenerationFunctionRole
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action: bedrock:InvokeModel
+            Resource: arn:aws:bedrock:us-east-1::foundation-model/amazon.titan-image-generator-v1
+
+  # Policy to allow Lambda function to upload images to S3
+  ImageGenerationS3Policy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: ImageGenerationS3Policy
+      Roles:
+        - Ref: ImageGenerationFunctionRole
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action: s3:PutObject
+            Resource: arn:aws:s3:::pgr301-couch-explorers/80/generated_images/*  #Hardcoded candidate number (80)
+
+Outputs:
+  # API Gateway URL for image generation
+  ImageGenerationApi:
+    Description: API Gateway endpoint URL for image generation
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/generate-image/"
+
+  # Lambda function ARN
+  ImageGenerationFunction:
+    Description: Image generation Lambda function ARN
+    Value: !GetAtt ImageGenerationFunction.Arn
+
+  # IAM Role for the Lambda function
+  ImageGenerationFunctionIamRole:
+    Description: IAM Role for Image generation Lambda function
+    Value: !GetAtt ImageGenerationFunctionRole.Arn
