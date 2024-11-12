@@ -25,3 +25,8 @@ curl -X POST https://7ap2qx8a95.execute-api.eu-west-1.amazonaws.com/Prod/generat
      -H "Content-Type: application/json" \
      -d '{"prompt": "Generate an image of a sunset over a mountain."}'
 ```
+
+## Task 1b - Github Actions Workflow
+
+Link to successfully deployed lambda function with github actions:
+https://github.com/ArianMathai/DevOpsExam2024/actions/runs/11799509488/job/32868179528
