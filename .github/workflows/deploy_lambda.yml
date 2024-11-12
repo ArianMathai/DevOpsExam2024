@@ -41,5 +41,5 @@ jobs:
       - name: Deploy with SAM
         working-directory: ./sam_lambda/arma008_exam/
         run: |
-          sam deploy --no-confirm-changeset --region ${{ secrets.AWS_REGION }} 
+          sam deploy --no-confirm-changeset --region ${{ secrets.AWS_REGION }} --no-fail-on-empty-changeset
       
