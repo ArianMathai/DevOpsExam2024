@@ -16,7 +16,6 @@ model_id = "amazon.titan-image-generator-v1"
 bucket_name = os.environ['BUCKET_NAME']
 candidate_number = "80"
 
-# bucket_name = "pgr301-couch-explorers"
 
 def lambda_handler(event, context):
     try:
