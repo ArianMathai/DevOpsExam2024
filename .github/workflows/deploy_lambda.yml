@@ -40,4 +40,7 @@ jobs:
 
       - name: Deploy with SAM
         working-directory: ./sam_lambda/arma008_exam/
-        run: sam deploy --no-confirm-changeset --region ${{ secrets.AWS_REGION }}
+        run: |
+          sam deploy --no-confirm-changeset --region ${{ secrets.AWS_REGION }} || 
+          if [ $? -eq 1 ]; then echo "No changes to deploy"; else exit $?; fi
+      
