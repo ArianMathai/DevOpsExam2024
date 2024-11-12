@@ -54,7 +54,7 @@ def lambda_handler(event, context):
 
         # Return a JSON response with the image URL
         response_body = {
-            "message": "Image generated successfully!",
+            "message": "Image generated successfully!!!",
             "image_url": f"https://{bucket_name}.s3.amazonaws.com/{s3_image_path}"
         }
 
