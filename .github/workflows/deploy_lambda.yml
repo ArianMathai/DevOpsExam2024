@@ -39,11 +39,13 @@ jobs:
         run: sam build
 
       - name: Deploy with SAM
+        id: deploy
         working-directory: ./sam_lambda/arma008_exam/
         run: |
-          sam deploy --no-confirm-changeset --region ${{ secrets.AWS_REGION }} || echo "NO_CHANGES"
-        continue-on-error: true
+          sam deploy --no-confirm-changeset --region ${{ secrets.AWS_REGION }} && echo "NO_CHANGES=false" >> $GITHUB_OUTPUT || (echo "NO_CHANGES=true" >> $GITHUB_OUTPUT && exit 1)
+
       - name: Check if deployment was skipped
-        if: failure() && steps.deploy.outputs.stdout.contains('NO_CHANGES')
+        if: steps.deploy.outputs.NO_CHANGES == 'true'
         run: echo "No changes to deploy, marking as success"
+        continue-on-error: true
       
