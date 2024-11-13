@@ -1,0 +1,38 @@
+name: Terraform Deployment
+
+on:
+  push:
+    branches:
+      - main
+      - '**'  # This will match all branches
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.9.1  # Specify your desired Terraform version
+
+      - name: Terraform Init
+        run: terraform init
+        working-directory: ./infra  # Path to your Terraform code
+
+      - name: Terraform Plan
+        if: github.ref != 'refs/heads/main'  # Run plan for non-main branches
+        run: terraform plan
+        working-directory: ./infra
+
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main'  # Run apply only for main branch
+        run: terraform apply -auto-approve
+        working-directory: ./infra
+
+      - name: Terraform Output
+        run: terraform output
+        working-directory: ./infra

@@ -1,5 +1,4 @@
 
-# main.tf - SQS Queue and DLQ
 resource "aws_sqs_queue" "dlq" {
   name = "${var.prefix}_image_processing_dlq"
 }
@@ -9,7 +8,7 @@ resource "aws_sqs_queue" "main_queue" {
   delay_seconds             = 0
   max_message_size         = 262144
   message_retention_seconds = 345600
-  visibility_timeout_seconds = 30
+  visibility_timeout_seconds = 300
   receive_wait_time_seconds = 20
 
   redrive_policy = jsonencode({
@@ -101,7 +100,7 @@ resource "aws_lambda_function" "image_processor" {
 resource "aws_lambda_event_source_mapping" "sqs_lambda_trigger" {
   event_source_arn = aws_sqs_queue.main_queue.arn
   function_name    = aws_lambda_function.image_processor.function_name
-  batch_size       = 1
+  # batch_size       = 1
 }
 
 # Create zip file from Python code
