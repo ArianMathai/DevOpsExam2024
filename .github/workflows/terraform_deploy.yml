@@ -3,7 +3,9 @@ name: Terraform Deployment
 on:
   push:
     branches:
-      - '**'
+      - '**'  # This will match all branches
+    workflow_dispatch:
+
 
 jobs:
   terraform:
