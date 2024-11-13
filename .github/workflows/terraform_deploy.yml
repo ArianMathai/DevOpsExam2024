@@ -6,6 +6,7 @@ on:
       - '**'  # This will match all branches
     workflow_dispatch:
 
+
 jobs:
   terraform:
     runs-on: ubuntu-latest
@@ -17,7 +18,7 @@ jobs:
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
         with:
-          terraform_version: 1.9.1  # Specify your desired Terraform version
+          terraform_version: 1.9.1
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
