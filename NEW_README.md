@@ -28,7 +28,7 @@ curl -X POST https://7ap2qx8a95.execute-api.eu-west-1.amazonaws.com/Prod/generat
 
 ## Task 1b - GitHub Actions Workflow
 
-Link to successfully deployed lambda function with github actions:
+Link to successfully deployed lambda function with GitHub actions:
 https://github.com/ArianMathai/DevOpsExam2024/actions/runs/11800842361/job/32872716936
 
 
