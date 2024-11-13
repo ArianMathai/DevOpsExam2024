@@ -100,7 +100,7 @@ resource "aws_lambda_function" "image_processor" {
 resource "aws_lambda_event_source_mapping" "sqs_lambda_trigger" {
   event_source_arn = aws_sqs_queue.main_queue.arn
   function_name    = aws_lambda_function.image_processor.function_name
-  # batch_size       = 1
+  batch_size       = 5
 }
 
 # Create zip file from Python code
