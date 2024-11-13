@@ -26,7 +26,28 @@ curl -X POST https://7ap2qx8a95.execute-api.eu-west-1.amazonaws.com/Prod/generat
      -d '{"prompt": "Generate an image of a sunset over a mountain."}'
 ```
 
-## Task 1b - Github Actions Workflow
+## Task 1b - GitHub Actions Workflow
 
 Link to successfully deployed lambda function with github actions:
-https://github.com/ArianMathai/DevOpsExam2024/actions/runs/11799509488/job/32868179528
+https://github.com/ArianMathai/DevOpsExam2024/actions/runs/11800842361/job/32872716936
+
+
+## Task 2a
+
+sqs queue endpoint:
+https://sqs.eu-west-1.amazonaws.com/244530008913/arma008_80_image_processing_queue
+
+Request to sqs on this format using aws cli:
+
+```
+aws sqs send-message \
+    --queue-url https://sqs.eu-west-1.amazonaws.com/244530008913/arma008_80_image_processing_queue \
+    --message-body "Generate an image of a cute cat playing with yarn"
+```
+
+## Task 2b
+
+Link to workflow on push to main branch:
+https://github.com/ArianMathai/DevOpsExam2024/actions/runs/11818725716/job/32926959733
+
+Link on push to non-main branch:
