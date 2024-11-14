@@ -84,7 +84,7 @@ https://sqs.eu-west-1.amazonaws.com/244530008913/arma008_80_image_processing_que
 ```
 
 ### Example usage
-Add your own AWS credentials and add your own prompt to create generate image.
+Add your own AWS credentials and add your own prompt to generate image.
 ```
 docker run -e AWS_ACCESS_KEY_ID=xxx -e AWS_SECRET_ACCESS_KEY=yyy -e SQS_QUEUE_URL=https://sqs.eu-west-1.amazonaws.com/244530008913/arma008_80_image_processing_queue arma008/sqs-image-client:latest "me on top of a pyramid" 
 ```
