@@ -52,3 +52,44 @@ https://github.com/ArianMathai/DevOpsExam2024/actions/runs/11818725716/job/32926
 
 Link on push to non-main branch:
 https://github.com/ArianMathai/DevOpsExam2024/actions/runs/11818933498/job/32927667182
+
+## Task 3
+
+### Docker Image Tagging Strategy
+
+My tagging strategy for Docker images is designed to balance ease of use with robust version control. This approach ensures team members can always access the latest version while maintaining traceability and rollback capabilities.
+
+#### Tags
+
+- **latest**: Always points to the most recent version.
+- **{git-sha}**: A unique tag based on the Git commit SHA.
+
+#### Rationale
+
+- **latest**: Provides quick access to the latest version, making it easy for the team to retrieve the most up-to-date image.
+- **{git-sha}**: Enables traceability by linking the image back to the exact source code commit, offering the ability to roll back to specific versions if needed.
+
+This strategy ensures a balance between accessing the newest version easily and maintaining control over version history.
+
+### Container image name
+
+```
+arma008/sqs-image-client
+```
+
+### Sqs url
+
+```
+https://sqs.eu-west-1.amazonaws.com/244530008913/arma008_80_image_processing_queue
+```
+
+### Example usage
+Add your own AWS credentials and add your own prompt to create generate image.
+```
+docker run -e AWS_ACCESS_KEY_ID=xxx -e AWS_SECRET_ACCESS_KEY=yyy -e SQS_QUEUE_URL=https://sqs.eu-west-1.amazonaws.com/244530008913/arma008_80_image_processing_queue arma008/sqs-image-client:latest "me on top of a pyramid" 
+```
+
+To check out other versions of the image, visit:
+https://hub.docker.com/r/arma008/sqs-image-client/tags
+
+
