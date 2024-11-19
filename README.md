@@ -245,7 +245,7 @@ I besvarelsen bør du trekke frem styrker og svakheter ved hver tilnærming, med
 
 ## LYKKE TIL OG HA DET GØY MED OPPGAVEN!
 
-# BESVARELSE AV OPPGAVENE
+# BESVARELSE AV OPPGAVENE (ENGELSK)
 
 # Documentation for DevOps exam 2024
 
