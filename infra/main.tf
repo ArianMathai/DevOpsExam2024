@@ -83,7 +83,7 @@ resource "aws_lambda_function" "image_processor" {
   runtime       = "python3.12"
   handler       = "lambda_sqs.lambda_handler"
   role         = aws_iam_role.lambda_exec_role.arn
-  filename     = "../lambda_function_sqs_payload.zip"
+  filename     = data.archive_file.lambda_zip.output_path
 
   memory_size   = 512
   timeout       = 300
