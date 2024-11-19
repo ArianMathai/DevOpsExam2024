@@ -130,7 +130,7 @@ resource "aws_cloudwatch_metric_alarm" "oldest_message_age_alarm" {
   namespace           = "AWS/SQS"
   statistic           = "Maximum"
   period              = 10
-  evaluation_periods   = 1
+  evaluation_periods  = 1
   threshold           = var.threshold
   comparison_operator = "GreaterThanOrEqualToThreshold"
 

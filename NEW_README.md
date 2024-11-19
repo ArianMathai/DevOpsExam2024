@@ -97,3 +97,106 @@ https://hub.docker.com/r/arma008/sqs-image-client/tags
 
 I have added an alarm for the ApproximateAgeOfOldestMessage sqs metric. 
 To add you own email for notifications you can add the email address as a variable when running terraform apply.
+
+## Task 5
+
+## Discussion of the Implications of Using Serverless Architecture vs. Microservices Architecture in Light of DevOps Principles
+
+This section compares a serverless architecture with Function-as-a-Service (FaaS) solutions like AWS Lambda and message queues like Amazon SQS, to a microservices architecture. The discussion focuses on key DevOps principles: automation and continuous delivery, observability, scalability and cost control, as well as ownership and responsibility.
+
+---
+
+## 1. Automation and Continuous Delivery (CI/CD)
+
+### Serverless Architecture
+- **Advantages**:
+    - Functions can be developed, tested, and deployed individually, enabling more frequent and faster deployments.
+    - CI/CD pipelines can be optimized for small, independent functions, allowing automation to focus on specific components.
+    - Deployment is managed by the cloud provider, reducing infrastructure management complexity.
+- **Disadvantages**:
+    - The increased number of functions and components requires more pipelines, which may lead to fragmentation and maintenance complexity.
+    - Testing and debugging across functions become more challenging due to distributed dependencies.
+
+### Microservices Architecture
+- **Advantages**:
+    - Services are typically larger, resulting in fewer CI/CD pipelines compared to serverless architecture.
+    - Building, testing, and deploying can include the entire service logic, offering better overall control.
+- **Disadvantages**:
+    - Requires more extensive infrastructure management, which can slow deployments and increase CI/CD setup complexity.
+    - Scaling deployments across multiple services may require orchestration tools like Kubernetes, adding overhead.
+
+---
+
+## 2. Observability
+
+### Serverless Architecture
+- **Advantages**:
+    - Tools like AWS CloudWatch provide deep insights into function-level metrics and logging.
+    - Automatic logging of function invocations, response times, and errors.
+- **Disadvantages**:
+    - Troubleshooting is more challenging as functions are smaller and tightly coupled through asynchronous message queues.
+    - "Cold starts" and transient errors can be difficult to detect and trace.
+    - Increased complexity with more functions, requiring consistent standards for logging and traceability.
+
+### Microservices Architecture
+- **Advantages**:
+    - Unified tools for logging, tracing, and monitoring (e.g., Prometheus, ELK stack) provide better visibility across services.
+    - Logging and error handling are simpler because microservices are often more self-contained and less reliant on third-party integrations.
+- **Disadvantages**:
+    - More manual configuration and maintenance are required to ensure effective logging and observability.
+    - Distributed systems can still face challenges with debugging and traceability, especially with many services.
+
+---
+
+## 3. Scalability and Cost Control
+
+### Serverless Architecture
+- **Advantages**:
+    - Automatically scales based on demand, reducing the need for pre-allocating resources.
+    - The "pay-as-you-go" pricing model ensures costs are directly tied to actual usage.
+    - Minimizes the risk of over- or under-provisioning resources.
+- **Disadvantages**:
+    - Costs can become unpredictable during sudden traffic spikes.
+    - Cold starts can result in higher latency for some function invocations.
+    - Limited control over the underlying infrastructure may restrict optimization.
+
+### Microservices Architecture
+- **Advantages**:
+    - Greater control over resource allocation and optimization, potentially more cost-effective for applications with steady load.
+    - Services can be configured to meet specific resource requirements, providing predictable costs.
+- **Disadvantages**:
+    - Requires more effort to design systems that scale effectively.
+    - Fixed cost structure even under low loads, as the infrastructure often needs to run continuously.
+
+---
+
+## 4. Ownership and Responsibility
+
+### Serverless Architecture
+- **Advantages**:
+    - The cloud provider assumes responsibility for infrastructure, including availability, scaling, and security.
+    - Development teams can focus on application logic rather than infrastructure.
+- **Disadvantages**:
+    - Limited control can lead to challenges in optimizing performance and costs.
+    - Increased complexity in managing the lifecycle of many small functions.
+
+### Microservices Architecture
+- **Advantages**:
+    - Full control over application performance and infrastructure offers greater flexibility.
+    - Clear ownership of services promotes accountability within the DevOps team.
+- **Disadvantages**:
+    - Greater responsibility for handling operations, security, and infrastructure.
+    - Requires dedicated resources to ensure performance and reliability.
+
+---
+
+## Conclusion
+
+| DevOps Aspect       | Serverless Architecture              | Microservices Architecture           |
+|----------------------|--------------------------------------|---------------------------------------|
+| **CI/CD**           | Frequent deployments but complex pipeline management | Fewer pipelines but slower deployments |
+| **Observability**   | Granular insights but challenges with distribution and cold starts | Holistic visibility but more manual setup |
+| **Scalability and Cost** | Dynamic scaling, unpredictable costs | Predictable costs but less flexibility |
+| **Ownership**       | Lower operational burden but increased complexity | Full control but higher administrative overhead |
+
+The choice between architectures should be based on the application’s requirements, the team’s skills, and the desired level of control and flexibility.
