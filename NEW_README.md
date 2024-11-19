@@ -93,3 +93,7 @@ To check out other versions of the docker-image, visit:
 https://hub.docker.com/r/arma008/sqs-image-client/tags
 
 
+## Task 4
+
+I have added an alarm for the ApproximateAgeOfOldestMessage sqs metric. 
+To add you own email for notifications you can add the email address as a variable when running terraform apply.

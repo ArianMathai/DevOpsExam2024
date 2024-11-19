@@ -116,15 +116,35 @@ resource "aws_cloudwatch_log_group" "image_processor_logs" {
   retention_in_days = 7
 }
 
-# Outputs
-output "sqs_queue_url" {
-  value = aws_sqs_queue.main_queue.url
+# SNS Topic for Alarm Notifications
+resource "aws_sns_topic" "notification_topic" {
+  name = "${var.prefix}-alarm-topic"
 }
 
-output "sqs_queue_arn" {
-  value = aws_sqs_queue.main_queue.arn
+# CloudWatch Alarm for ApproximateAgeOfOldestMessage
+resource "aws_cloudwatch_metric_alarm" "oldest_message_age_alarm" {
+  alarm_name          = "${var.prefix}_oldest_message_age_alarm"
+  alarm_description   = "Alarm when ApproximateAgeOfOldestMessage exceeds threshold."
+
+  metric_name         = "ApproximateAgeOfOldestMessage"
+  namespace           = "AWS/SQS"
+  statistic           = "Maximum"
+  period              = 10
+  evaluation_periods   = 1
+  threshold           = var.threshold
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+
+  dimensions          = {
+    QueueName         = aws_sqs_queue.main_queue.name
+  }
+  alarm_actions       = [aws_sns_topic.notification_topic.arn]
 }
 
-output "lambda_function_name" {
-  value = aws_lambda_function.image_processor.function_name
+# SNS Subscription for Email Notifications
+resource "aws_sns_topic_subscription" "email_subscription" {
+  topic_arn = aws_sns_topic.notification_topic.arn
+  protocol  = "email"
+  endpoint  = var.notification_email # Use the variable defined above
 }
+
+

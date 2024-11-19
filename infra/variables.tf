@@ -8,3 +8,15 @@ variable "prefix" {
   description = "Prefix for all resource names"
   default     = "arma008_80"
 }
+
+variable "notification_email" {
+  description = "Email address to receive alarm notifications"
+  type        = string
+  default     = "arian.mathai@gmail.com"
+}
+
+variable "threshold" {
+  description = "threshold for sns alarm to trigger"
+  type        = string
+  default     = "1"
+}
