@@ -1,6 +1,6 @@
-# API Documentation for Image Generation
+# Documentation for DevOps exam 2024
 
-## Task 1a - Image Generation API
+# Task 1a - Image Generation API
 
 This API endpoint allows you to generate images based on a text prompt using a machine learning model.
 
@@ -26,13 +26,13 @@ curl -X POST https://7ap2qx8a95.execute-api.eu-west-1.amazonaws.com/Prod/generat
      -d '{"prompt": "Generate an image of a sunset over a mountain."}'
 ```
 
-## Task 1b - GitHub Actions Workflow
+# Task 1b - GitHub Actions Workflow
 
 Link to successfully deployed lambda function with GitHub actions:
 https://github.com/ArianMathai/DevOpsExam2024/actions/runs/11800842361/job/32872716936
 
 
-## Task 2a
+# Task 2a
 
 sqs queue endpoint:
 https://sqs.eu-west-1.amazonaws.com/244530008913/arma008_80_image_processing_queue
@@ -45,7 +45,7 @@ aws sqs send-message \
     --message-body "Generate an image of a cute cat playing with yarn"
 ```
 
-## Task 2b
+# Task 2b
 
 Link to workflow on push to main branch:
 https://github.com/ArianMathai/DevOpsExam2024/actions/runs/11818725716/job/32926959733
@@ -53,7 +53,7 @@ https://github.com/ArianMathai/DevOpsExam2024/actions/runs/11818725716/job/32926
 Link on push to non-main branch:
 https://github.com/ArianMathai/DevOpsExam2024/actions/runs/11818933498/job/32927667182
 
-## Task 3
+# Task 3
 
 ### Docker Image Tagging Strategy
 
@@ -93,12 +93,12 @@ To check out other versions of the docker-image, visit:
 https://hub.docker.com/r/arma008/sqs-image-client/tags
 
 
-## Task 4
+# Task 4
 
 I have added an alarm for the ApproximateAgeOfOldestMessage sqs metric. 
 To add you own email for notifications you can add the email address as a variable when running terraform apply.
 
-## Task 5
+# Task 5
 
 ## Discussion of the Implications of Using Serverless Architecture vs. Microservices Architecture in Light of DevOps Principles
 
