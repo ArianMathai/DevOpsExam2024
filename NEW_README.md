@@ -102,8 +102,6 @@ To add you own email for notifications you can add the email address as a variab
 
 ## Discussion of the Implications of Using Serverless Architecture vs. Microservices Architecture in Light of DevOps Principles
 
-This section compares a serverless architecture with Function-as-a-Service (FaaS) solutions like AWS Lambda and message queues like Amazon SQS, to a microservices architecture. The discussion focuses on key DevOps principles: automation and continuous delivery, observability, scalability and cost control, as well as ownership and responsibility.
-
 ---
 
 ## 1. Automation and Continuous Delivery (CI/CD)
