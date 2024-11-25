@@ -45,6 +45,7 @@ aws sqs send-message \
     --message-body "Generate an image of a cute cat playing with yarn"
 ```
 
+I have also added a Dead Letter Queue (DLQ) to serve as a safety net for my main queue. It captures messages that fail to be processed by the main queue after three attempts. This setup helps ensure that problematic messages do not block the main queue, allowing for smoother processing and easier troubleshooting of errors.
 # Task 2b
 
 Link to workflow on push to main branch:

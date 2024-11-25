@@ -1,6 +1,6 @@
 
 resource "aws_sqs_queue" "dlq" {
-  name = "${var.prefix}_image_processing_dlq"
+  name = "${var.prefix}_image_processing_dlq"  # I have a dlq to handle failed messages to the main queue
 }
 
 resource "aws_sqs_queue" "main_queue" {
@@ -12,7 +12,7 @@ resource "aws_sqs_queue" "main_queue" {
   receive_wait_time_seconds = 20
 
   redrive_policy = jsonencode({
-    deadLetterTargetArn = aws_sqs_queue.dlq.arn
+    deadLetterTargetArn = aws_sqs_queue.dlq.arn # After three failed processing attempts by the main queue, the dlq receives the message
     maxReceiveCount     = 3
   })
 }
